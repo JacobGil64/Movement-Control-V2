@@ -10,6 +10,7 @@
 #include <Commands/Command.h>
 #include <SmartDashboard/SendableChooser.h>
 #include <TimedRobot.h>
+#include <CameraServer.h>
 
 #include "Commands/ExampleCommand.h"
 #include "Commands/MyAutoCommand.h"
@@ -18,13 +19,13 @@
 #include "Subsystems/DriveTrain.h"
 #include "Subsystems/Arm.h"
 
-class Robot : public frc::TimedRobot {
+class Robot: public frc::TimedRobot
+{
 public:
 	static ExampleSubsystem* m_subsystem;
 	static OI* m_oi;
 	static Arm* armP;
 	static DriveTrain* drive;
-
 
 	void RobotInit() override;
 	void DisabledInit() override;

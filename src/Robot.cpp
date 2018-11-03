@@ -5,13 +5,8 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-
 // where instantiate Drive Train
-
-
-
 #include "Robot.h"
-
 #include <Commands/Scheduler.h>
 #include <SmartDashboard/SmartDashboard.h>
 
@@ -20,7 +15,12 @@ OI* Robot::m_oi;
 DriveTrain* Robot::drive;
 Arm* Robot::armP;
 
-void Robot::RobotInit() {
+void Robot::RobotInit()
+{
+
+	// needed to include camera server in robot.h
+	CameraServer::GetInstance()->StartAutomaticCapture();
+
 	m_chooser.AddDefault("Default Auto", &m_defaultAuto);
 	m_chooser.AddObject("My Auto", &m_myAuto);
 	frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
@@ -39,7 +39,8 @@ void Robot::DisabledInit()
 	armP = new Arm();
 }
 
-void Robot::DisabledPeriodic() {
+void Robot::DisabledPeriodic()
+{
 	frc::Scheduler::GetInstance()->Run();
 }
 
@@ -54,7 +55,8 @@ void Robot::DisabledPeriodic() {
  * chooser code above (like the commented example) or additional comparisons to
  * the if-else structure below with additional strings & commands.
  */
-void Robot::AutonomousInit() {
+void Robot::AutonomousInit()
+{
 	// std::string autoSelected = frc::SmartDashboard::GetString(
 	// 		"Auto Selector", "Default");
 	// if (autoSelected == "My Auto") {
@@ -65,31 +67,37 @@ void Robot::AutonomousInit() {
 
 	m_autonomousCommand = m_chooser.GetSelected();
 
-	if (m_autonomousCommand != nullptr) {
+	if (m_autonomousCommand != nullptr)
+	{
 		m_autonomousCommand->Start();
 	}
 }
 
-void Robot::AutonomousPeriodic() {
+void Robot::AutonomousPeriodic()
+{
 	frc::Scheduler::GetInstance()->Run();
 }
 
-void Robot::TeleopInit() {
+void Robot::TeleopInit()
+{
 	// This makes sure that the autonomous stops running when
 	// teleop starts running. If you want the autonomous to
 	// continue until interrupted by another command, remove
 	// this line or comment it out.
-	if (m_autonomousCommand != nullptr) {
+	if (m_autonomousCommand != nullptr)
+	{
 		m_autonomousCommand->Cancel();
 		m_autonomousCommand = nullptr;
 	}
 }
 
-
-void Robot::TeleopPeriodic() {
+void Robot::TeleopPeriodic()
+{
 	frc::Scheduler::GetInstance()->Run();
 }
 
-void Robot::TestPeriodic() {}
+void Robot::TestPeriodic()
+{
+}
 
 START_ROBOT_CLASS(Robot)

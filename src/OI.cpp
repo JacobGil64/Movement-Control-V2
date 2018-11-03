@@ -13,7 +13,7 @@
 //basically where you declare all your private variables
 //name(new oturnType(port_number));
 
-OI::OI(): leftStick(new Joystick(0)), rightStick(new Joystick(1))
+OI::OI(): leftStick(new Joystick(0)), rightStick(new Joystick(1)), armStick(new Joystick(3))
 {
 	// Process operator interface input here.
 }
